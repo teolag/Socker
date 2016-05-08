@@ -49,11 +49,14 @@ function incomingMessage(con, message) {
 	}
 	delete data.sockerMessageType;
 
-	console.log("Message from connection " + con.id + ":", type, data);
+
 	if(listeners.hasOwnProperty(type)) {
 		listeners[type].forEach(function(callback) {
+			console.log("Message from connection " + con.id + ":", type, data);
 			callback(con, data, type);
 		});
+	} else {
+		console.log("Unhandled message from connection " + con.id + ":", type, data);
 	}
 }
 
