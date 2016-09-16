@@ -14,19 +14,19 @@ var Socker = (function() {
 
 		function connectionEstablished(e) {
 			processSendQueue();
-			if(openCallback) openCallback();
+			if(openCallback) openCallback(e);
 			else console.log("connectionEstablished", e);
 		}
 
 		function connectionClosed(e) {
 			connected = false;
-			if(closeCallback) closeCallback();
+			if(closeCallback) closeCallback(e);
 			else console.log("Connection was closed", e);
 		}
 
 		function connectionFailed(e) {
 			connected = false;
-			if(errorCallback) errorCallback();
+			if(errorCallback) errorCallback(e);
 			else console.log("Can not connect to websocket", e);
 		}
 
