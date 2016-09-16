@@ -13,21 +13,21 @@ var Socker = (function() {
 		socket.addEventListener("message", messageReceived);
 
 		function connectionEstablished(e) {
-			console.log("connectionEstablished", e);
 			processSendQueue();
 			if(openCallback) openCallback();
+			else console.log("connectionEstablished", e);
 		}
 
 		function connectionClosed(e) {
 			connected = false;
-			console.log("Connection was closed", e);
 			if(closeCallback) closeCallback();
+			else console.log("Connection was closed", e);
 		}
 
 		function connectionFailed(e) {
 			connected = false;
-			console.log("Can not connect to websocket", e);
 			if(errorCallback) errorCallback();
+			else console.log("Can not connect to websocket", e);
 		}
 
 
