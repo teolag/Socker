@@ -5,7 +5,7 @@ var Socker = (function() {
 		sendQueue = [];
 
 
-	function connect(url, protocol, callback) {
+	function connect(url, protocol, openCallback, closeCallback, errorCallback) {
 		socket = new WebSocket(url, protocol);
 		socket.addEventListener("open", connectionEstablished);
 		socket.addEventListener("error", connectionFailed);
@@ -15,17 +15,19 @@ var Socker = (function() {
 		function connectionEstablished(e) {
 			console.log("connectionEstablished", e);
 			processSendQueue();
-			if(callback) callback();
+			if(openCallback) openCallback();
 		}
 
 		function connectionClosed(e) {
 			connected = false;
 			console.log("Connection was closed", e);
+			if(closeCallback) closeCallback();
 		}
 
 		function connectionFailed(e) {
 			connected = false;
 			console.log("Can not connect to websocket", e);
+			if(errorCallback) errorCallback();
 		}
 
 
