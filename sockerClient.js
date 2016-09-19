@@ -33,13 +33,13 @@ var Socker = (function() {
 
 		function messageReceived(e) {
 			try {
-				var data = JSON.parse(e.data);
+				var payload = JSON.parse(e.data);
 			} catch(e) {
 				console.error("Error parsing message", e);
 			}
 
-			var type = data.sockerMessageType;
-			delete data.sockerMessageType;
+			var type = payload.type;
+			var data = payload.data;
 
 			if(messageListeners.hasOwnProperty(type)) {
 				messageListeners[type].forEach(function(callback) {
@@ -53,8 +53,8 @@ var Socker = (function() {
 
 
 
-	function sendMessage(type, payload) {
-		payload.sockerMessageType = type;
+	function sendMessage(type, data) {
+		var payload = {type: type, data:data};
 		if(isConnected()) {
 			console.log("Send", payload);
 			socket.send(JSON.stringify(payload));
@@ -65,10 +65,8 @@ var Socker = (function() {
 
 	function processSendQueue() {
 		while(isConnected() && sendQueue.length>0) {
-			var message = sendQueue.shift();
-			var type = message.sockerMessageType;
-			delete message.sockerMessageType;
-			sendMessage(type, message);
+			var payload = sendQueue.shift();
+			socket.send(JSON.stringify(payload));
 		}
 	}
 
