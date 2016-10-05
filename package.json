@@ -1,6 +1,6 @@
 {
   "name": "xio-socker",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Server and client tool to simplify the use of websockets",
   "main": "index.js",
   "scripts": {
