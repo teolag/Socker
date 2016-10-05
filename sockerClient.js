@@ -76,7 +76,7 @@ var Socker = (function() {
 	}
 
 	function isConnected() {
-		return socket.readyState === 1;
+		return socket && socket.readyState === 1;
 	}
 
 
