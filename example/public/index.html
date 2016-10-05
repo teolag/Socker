@@ -1,0 +1,19 @@
+<html>
+<head>
+	<script src="/socker-client.js"></script>
+	<script>
+
+	socker.connect("ws://localhost:8080", "socker-test", openCallback);
+
+	function openCallback(e) {
+		console.log("websocket established");
+
+		socker.send("ping", {name:"John", age:33});
+	}
+
+	</script>
+</head>
+<body>
+	hej hej
+</body>
+</html>
