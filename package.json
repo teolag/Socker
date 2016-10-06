@@ -2,7 +2,7 @@
   "name": "xio-socker",
   "version": "0.7.1",
   "description": "Server and client tool to simplify the use of websockets",
-  "main": "index.js",
+  "main": "lib/socker-server.js",
   "browser": "lib/socker-client.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
