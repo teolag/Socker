@@ -1,0 +1,28 @@
+{
+  "name": "xio-socker",
+  "version": "0.7.1",
+  "description": "Server and client tool to simplify the use of websockets",
+  "main": "lib/socker-server.js",
+  "browser": "lib/socker-client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teolag/Socker.git"
+  },
+  "keywords": [
+    "websocket",
+    "client",
+    "server"
+  ],
+  "author": "Teodor Lagerqvist",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teolag/Socker/issues"
+  },
+  "homepage": "https://github.com/teolag/Socker#readme",
+  "dependencies": {
+    "websocket": "^1.0.23"
+  }
+}

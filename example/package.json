@@ -1,0 +1,10 @@
+{
+	"name": "socker-example",
+	"description": "Simple example for xio-socker",
+	"author": "Teodor Lagerqvist",
+	"version": "1.0.0",
+	"private": true,
+	"dependencies": {
+		"express": "~2"
+	}
+}
