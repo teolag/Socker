@@ -1,4 +1,4 @@
-var socker = require('../lib/socker').server;
+var socker = require('../lib/socker');
 var express = require('express');
 
 var app = express.createServer();

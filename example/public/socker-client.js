@@ -1,9 +1,7 @@
-(function(exports) {
+var socker = (function() {
 	var socket,
 		connected = false,
-		messageListeners = {},
-		sendQueue = [];
-
+		messageListeners = {};
 
 	function connect(url, protocol, openCallback, closeCallback, errorCallback) {
 		socket = new WebSocket(url, protocol);
@@ -13,7 +11,6 @@
 		socket.addEventListener("message", messageReceived);
 
 		function connectionEstablished(e) {
-			processSendQueue();
 			if(openCallback) openCallback(e);
 			else console.log("connectionEstablished", e);
 		}
@@ -59,14 +56,7 @@
 			console.log("Send", payload);
 			socket.send(JSON.stringify(payload));
 		} else {
-			sendQueue.push(payload);
-		}
-	}
-
-	function processSendQueue() {
-		while(isConnected() && sendQueue.length>0) {
-			var payload = sendQueue.shift();
-			socket.send(JSON.stringify(payload));
+			throw new Error("No websocket connection");
 		}
 	}
 
@@ -79,11 +69,14 @@
 		return socket && socket.readyState === 1;
 	}
 
+	return {
+		connect: connect,
+		send: sendMessage,
+		on: addMessageListener,
+		isConnected: isConnected
+	}
+}());
 
-	exports.connect = connect;
-	exports.send = sendMessage;
-	exports.on = addMessageListener;
-	exports.connected = isConnected;
-
-
-})(typeof exports === 'undefined'? this['socker']={}: exports);
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = socker;
+}
